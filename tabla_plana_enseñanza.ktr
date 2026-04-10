@@ -587,13 +587,13 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Seleccionar NO agregados 2 3</from>
-      <to>Totales a 0 2 3</to>
+      <from>Renombrar valores y longitud 2 3</from>
+      <to>Replace in string 3</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Renombrar valores y longitud 2 3</from>
-      <to>Replace in string 3</to>
+      <from>Seleccionar NO agregados 2 3</from>
+      <to>Totales a 0 2 3</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -632,6 +632,11 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>Ordenar filas 2 2 2</from>
+      <to>Renombrar valores y longitud 2 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>Seleccionar NO agregados 2 2 2</from>
       <to>Totales a 0 2 2 2</to>
       <enabled>Y</enabled>
@@ -642,8 +647,8 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Ordenar filas 2 2 2</from>
-      <to>Renombrar valores y longitud 2 2 2</to>
+      <from>Renombrar valores y longitud 2 2 2</from>
+      <to>Replace in string 2 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -659,11 +664,6 @@
     <hop>
       <from>Replace in string 2</from>
       <to>Mapeo de valores 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Renombrar valores y longitud 2 2 2</from>
-      <to>Replace in string 2 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -1855,7 +1855,7 @@
     <name>Mapeo de valores</name>
     <type>ValueMapper</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1912,7 +1912,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1952</xloc>
+      <xloc>1984</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1921,7 +1921,7 @@
     <name>Mapeo de valores 2</name>
     <type>ValueMapper</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1987,7 +1987,7 @@
     <name>Mapeo de valores 3</name>
     <type>ValueMapper</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -2053,7 +2053,7 @@
     <name>Mapeo de valores 4</name>
     <type>ValueMapper</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -2569,7 +2569,7 @@
     <name>Renombrar valores y longitud</name>
     <type>SelectValues</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -2746,66 +2746,6 @@
     </GUI>
   </step>
   <step>
-    <name>Renombrar valores y longitud 2 3</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>Nivel_ciclo</name>
-        <rename/>
-      </field>
-      <field>
-        <name>Ámbito_de_estudio_ISCED_1999</name>
-        <rename>Rama_enseñanza</rename>
-      </field>
-      <field>
-        <name>Tipo_universidad</name>
-        <rename/>
-      </field>
-      <field>
-        <name>Tipo_centro</name>
-        <rename/>
-      </field>
-      <field>
-        <name>Universidad</name>
-        <rename>Universidad</rename>
-      </field>
-      <field>
-        <name>﻿Sexo</name>
-        <rename>Sexo</rename>
-      </field>
-      <field>
-        <name>Total</name>
-        <rename/>
-      </field>
-      <field>
-        <name>Año</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1600</xloc>
-      <yloc>416</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Renombrar valores y longitud 2 2 2</name>
     <type>SelectValues</type>
     <description/>
@@ -2862,6 +2802,66 @@
     <GUI>
       <xloc>1584</xloc>
       <yloc>496</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Renombrar valores y longitud 2 3</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>Nivel_ciclo</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Ámbito_de_estudio_ISCED_1999</name>
+        <rename>Rama_enseñanza</rename>
+      </field>
+      <field>
+        <name>Tipo_universidad</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Tipo_centro</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Universidad</name>
+        <rename>Universidad</rename>
+      </field>
+      <field>
+        <name>﻿Sexo</name>
+        <rename>Sexo</rename>
+      </field>
+      <field>
+        <name>Total</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Año</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1600</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3060,8 +3060,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2256</xloc>
-      <yloc>224</yloc>
+      <xloc>2272</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3326,22 +3326,6 @@
               <mask/>
             </value>
           </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>AND</operator>
-            <leftvalue>Ámbito_de_estudio_ISCED_1999</leftvalue>
-            <function>&lt;></function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>Total</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask/>
-            </value>
-          </condition>
         </conditions>
       </condition>
     </compare>
@@ -3418,22 +3402,6 @@
               <name>constant</name>
               <type>String</type>
               <text>Total Ámbito</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask/>
-            </value>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>AND</operator>
-            <leftvalue>Ámbito_de_estudio_ISCED_1999</leftvalue>
-            <function>&lt;></function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>Total</text>
               <length>-1</length>
               <precision>-1</precision>
               <isnull>N</isnull>
