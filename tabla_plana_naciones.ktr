@@ -466,11 +466,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Nacionalidades</from>
-      <to>Filtrar filas 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Totales a 0</from>
       <to>Limpieza de los miles</to>
       <enabled>Y</enabled>
@@ -481,7 +476,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>CSV file input</from>
+      <from>Universidad</from>
       <to>Ordenar filas 2 2</to>
       <enabled>Y</enabled>
     </hop>
@@ -505,6 +500,11 @@
       <to>Salida Tabla</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>fact_naciones</from>
+      <to>Filtrar filas 2</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name>Búsqueda en base de datos</name>
@@ -517,7 +517,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>TFG</connection>
+    <connection>TFG-Nuevo</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
@@ -528,50 +528,26 @@
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>﻿Universidad</name>
-        <field>universidad</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Nivel académico</name>
+        <name>Nivel_académico</name>
         <field>nivel</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>Tipo de centro</name>
+        <name>Tipo_de_centro</name>
         <field>tipo_centro</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>Rama de enseñanza</name>
+        <name>Rama_de_enseñanza</name>
         <field>rama_ensenanza</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>comunidad_autonoma</name>
-        <field>comunidad_autonoma</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>tipo_universidad</name>
-        <field>tipo_universidad</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
         <name>modalidad</name>
         <field>modalidad</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>provincia</name>
-        <field>provincia</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -607,7 +583,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>TFG</connection>
+    <connection>TFG-Nuevo</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
@@ -619,7 +595,7 @@
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
         <name>Periodo</name>
-        <field>periodo</field>
+        <field>curso</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -655,13 +631,13 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>TFG</connection>
+    <connection>TFG-Nuevo</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
     <lookup>
       <schema>public</schema>
-      <table>dim_sexo</table>
+      <table>dim_quien_nac</table>
       <orderby/>
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
@@ -671,9 +647,15 @@
         <condition>=</condition>
         <name2/>
       </key>
+      <key>
+        <name>Zona_de_nacionalidad</name>
+        <field>nacionalidad</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
-        <name>id_sexo</name>
-        <rename>id_sexo</rename>
+        <name>id_quien_nac</name>
+        <rename>id_quien_nac</rename>
         <default/>
         <type>None</type>
       </value>
@@ -703,25 +685,43 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>TFG</connection>
+    <connection>TFG-Nuevo</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
     <lookup>
       <schema>public</schema>
-      <table>dim_nac</table>
+      <table>dim_universidad</table>
       <orderby/>
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>Zona de nacionalidad</name>
-        <field>nacionalidad</field>
+        <name>universidad</name>
+        <field>universidad</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>tipo_universidad</name>
+        <field>tipo_universidad</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>comunidad_autonoma</name>
+        <field>comunidad_autonoma</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>provincia</name>
+        <field>provincia</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
-        <name>id_nacionalidad</name>
-        <rename>id_nacionalidad</rename>
+        <name>id_universidad</name>
+        <rename>id_universidad</rename>
         <default/>
         <type>None</type>
       </value>
@@ -737,102 +737,6 @@
     <GUI>
       <xloc>1232</xloc>
       <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>CSV file input</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <filename>${Internal.Entry.Current.Directory}/universidades_con_provincia.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>;</separator>
-    <enclosure>"</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <format>mixed</format>
-    <encoding>windows-1258</encoding>
-    <fields>
-      <field>
-        <name>universidad</name>
-        <type>String</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>40</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>comunidad_autonoma</name>
-        <type>String</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>26</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>tipo_universidad</name>
-        <type>String</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>7</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>modalidad</name>
-        <type>String</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>13</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>provincia</name>
-        <type>String</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>22</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>112</xloc>
-      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -871,7 +775,7 @@
           <condition>
             <negated>N</negated>
             <operator>AND</operator>
-            <leftvalue>Nivel académico</leftvalue>
+            <leftvalue>Nivel_académico</leftvalue>
             <function>&lt;></function>
             <rightvalue/>
             <value>
@@ -887,7 +791,7 @@
           <condition>
             <negated>N</negated>
             <operator>AND</operator>
-            <leftvalue>Tipo de centro</leftvalue>
+            <leftvalue>Tipo_de_centro</leftvalue>
             <function>&lt;></function>
             <rightvalue/>
             <value>
@@ -919,7 +823,7 @@
           <condition>
             <negated>N</negated>
             <operator>AND</operator>
-            <leftvalue>Zona de nacionalidad</leftvalue>
+            <leftvalue>Zona_de_nacionalidad</leftvalue>
             <function>&lt;></function>
             <rightvalue/>
             <value>
@@ -935,7 +839,7 @@
           <condition>
             <negated>N</negated>
             <operator>AND</operator>
-            <leftvalue>Rama de enseñanza</leftvalue>
+            <leftvalue>Rama_de_enseñanza</leftvalue>
             <function>&lt;></function>
             <rightvalue/>
             <value>
@@ -1101,135 +1005,6 @@
     </GUI>
   </step>
   <step>
-    <name>Nacionalidades</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <filename>${Internal.Entry.Current.Directory}/Datos 2015-2022_naciones.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>;</separator>
-    <enclosure>"</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <format>mixed</format>
-    <encoding>UTF-8</encoding>
-    <fields>
-      <field>
-        <name>﻿Universidad</name>
-        <type>String</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>40</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Nivel académico</name>
-        <type>String</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>13</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Tipo de centro</name>
-        <type>String</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>15</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Sexo</name>
-        <type>String</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>11</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Zona de nacionalidad</name>
-        <type>String</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>23</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Rama de enseñanza</name>
-        <type>String</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>29</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Periodo</name>
-        <type>String</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>9</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Total</name>
-        <type>String</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>9</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>112</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Ordenar filas 2</name>
     <type>SortRows</type>
     <description/>
@@ -1257,7 +1032,7 @@
         <presorted>N</presorted>
       </field>
       <field>
-        <name>Nivel académico</name>
+        <name>Nivel_académico</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1265,7 +1040,7 @@
         <presorted>N</presorted>
       </field>
       <field>
-        <name>Tipo de centro</name>
+        <name>Tipo_de_centro</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1432,15 +1207,19 @@
     <fields>
       <field>
         <name>id_estudio</name>
+        <rename/>
       </field>
       <field>
         <name>id_tiempo</name>
+        <rename/>
       </field>
       <field>
-        <name>id_sexo</name>
+        <name>id_quien_nac</name>
+        <rename/>
       </field>
       <field>
-        <name>id_nacionalidad</name>
+        <name>id_universidad</name>
+        <rename/>
       </field>
       <field>
         <name>Total</name>
@@ -1502,6 +1281,102 @@
     </GUI>
   </step>
   <step>
+    <name>Universidad</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filename>${Internal.Entry.Current.Directory}/universidades_con_provincia.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>;</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding>windows-1258</encoding>
+    <fields>
+      <field>
+        <name>universidad</name>
+        <type>String</type>
+        <format/>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>40</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>comunidad_autonoma</name>
+        <type>String</type>
+        <format/>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>26</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>tipo_universidad</name>
+        <type>String</type>
+        <format/>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>7</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>modalidad</name>
+        <type>String</type>
+        <format/>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>13</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>provincia</name>
+        <type>String</type>
+        <format/>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>22</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Unión por clave</name>
     <type>MergeJoin</type>
     <description/>
@@ -1532,6 +1407,216 @@
     <GUI>
       <xloc>624</xloc>
       <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>fact_naciones</name>
+    <type>TextFileInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <accept_filenames>N</accept_filenames>
+    <passing_through_fields>N</passing_through_fields>
+    <accept_field/>
+    <accept_stepname/>
+    <separator>;</separator>
+    <enclosure>"</enclosure>
+    <enclosure_breaks>N</enclosure_breaks>
+    <escapechar/>
+    <header>Y</header>
+    <nr_headerlines>1</nr_headerlines>
+    <footer>N</footer>
+    <nr_footerlines>1</nr_footerlines>
+    <line_wrapped>N</line_wrapped>
+    <nr_wraps>1</nr_wraps>
+    <layout_paged>N</layout_paged>
+    <nr_lines_per_page>80</nr_lines_per_page>
+    <nr_lines_doc_header>0</nr_lines_doc_header>
+    <noempty>Y</noempty>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <rownumByFile>N</rownumByFile>
+    <rownum_field/>
+    <format>DOS</format>
+    <encoding>UTF-8</encoding>
+    <length>Characters</length>
+    <add_to_result_filenames>Y</add_to_result_filenames>
+    <file>
+      <name>${Internal.Entry.Current.Directory}/Naciones</name>
+      <filemask>.*\.csv</filemask>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+      <type>CSV</type>
+      <compression>None</compression>
+    </file>
+    <filters>
+    </filters>
+    <fields>
+      <field>
+        <name>﻿Universidad</name>
+        <type>String</type>
+        <format/>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>23</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>Nivel_académico</name>
+        <type>String</type>
+        <format/>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>13</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>Tipo_de_centro</name>
+        <type>String</type>
+        <format/>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>15</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>Sexo</name>
+        <type>String</type>
+        <format/>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>11</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>Zona_de_nacionalidad</name>
+        <type>String</type>
+        <format/>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>23</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>Rama_de_enseñanza</name>
+        <type>String</type>
+        <format/>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>29</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>Periodo</name>
+        <type>String</type>
+        <format/>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>9</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>Total</name>
+        <type>String</type>
+        <format/>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>9</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <error_ignored>N</error_ignored>
+    <skip_bad_files>N</skip_bad_files>
+    <file_error_field/>
+    <file_error_message_field/>
+    <error_line_skipped>N</error_line_skipped>
+    <error_count_field/>
+    <error_fields_field/>
+    <error_text_field/>
+    <bad_line_files_destination_directory/>
+    <bad_line_files_extension>warning</bad_line_files_extension>
+    <error_line_files_destination_directory/>
+    <error_line_files_extension>error</error_line_files_extension>
+    <line_number_files_destination_directory/>
+    <line_number_files_extension>line</line_number_files_extension>
+    <date_format_lenient>Y</date_format_lenient>
+    <date_format_locale>es_ES</date_format_locale>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

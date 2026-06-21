@@ -436,11 +436,6 @@
   </notepads>
   <order>
     <hop>
-      <from>dim_tiempo</from>
-      <to>Selecciona/Renombra valores</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Selecciona/Renombra valores</from>
       <to>Ordenar filas</to>
       <enabled>Y</enabled>
@@ -452,23 +447,18 @@
     </hop>
     <hop>
       <from>Filas Unicas</from>
-      <to>Valor JavaScript modificado</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Valor JavaScript modificado</from>
-      <to>Partir campos</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Partir campos</from>
       <to>Insertar / Actualizar</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Dim_tiempo</from>
+      <to>Selecciona/Renombra valores</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>dim_tiempo</name>
-    <type>CsvInput</type>
+    <name>Dim_tiempo</name>
+    <type>TextFileInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -477,20 +467,44 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${Internal.Entry.Current.Directory}/Datos 2015-2022_naciones.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
+    <accept_filenames>N</accept_filenames>
+    <passing_through_fields>N</passing_through_fields>
+    <accept_field/>
+    <accept_stepname/>
     <separator>;</separator>
     <enclosure>"</enclosure>
+    <enclosure_breaks>N</enclosure_breaks>
+    <escapechar/>
     <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <format>mixed</format>
-    <encoding/>
+    <nr_headerlines>1</nr_headerlines>
+    <footer>N</footer>
+    <nr_footerlines>1</nr_footerlines>
+    <line_wrapped>N</line_wrapped>
+    <nr_wraps>1</nr_wraps>
+    <layout_paged>N</layout_paged>
+    <nr_lines_per_page>80</nr_lines_per_page>
+    <nr_lines_doc_header>0</nr_lines_doc_header>
+    <noempty>Y</noempty>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <rownumByFile>N</rownumByFile>
+    <rownum_field/>
+    <format>DOS</format>
+    <encoding>UTF-8</encoding>
+    <length>Characters</length>
+    <add_to_result_filenames>Y</add_to_result_filenames>
+    <file>
+      <name>${Internal.Entry.Current.Directory}/Naciones</name>
+      <filemask>.*\.csv</filemask>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+      <type>CSV</type>
+      <compression>None</compression>
+    </file>
+    <filters>
+    </filters>
     <fields>
       <field>
         <name>﻿Universidad</name>
@@ -499,31 +513,43 @@
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
         <length>23</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
       <field>
-        <name>Nivel académico</name>
+        <name>Nivel_académico</name>
         <type>String</type>
         <format/>
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
         <length>13</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
       <field>
-        <name>Tipo de centro</name>
+        <name>Tipo_de_centro</name>
         <type>String</type>
         <format/>
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
         <length>15</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
       <field>
         <name>Sexo</name>
@@ -532,31 +558,43 @@
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
         <length>11</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
       <field>
-        <name>Zona de nacionalidad</name>
+        <name>Zona_de_nacionalidad</name>
         <type>String</type>
         <format/>
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
         <length>23</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
       <field>
-        <name>Rama de enseñanza</name>
+        <name>Rama_de_enseñanza</name>
         <type>String</type>
         <format/>
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
         <length>29</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
       <field>
         <name>Periodo</name>
@@ -565,9 +603,13 @@
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
         <length>9</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
       <field>
         <name>Total</name>
@@ -576,11 +618,40 @@
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
         <length>9</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
     </fields>
+    <limit>0</limit>
+    <error_ignored>N</error_ignored>
+    <skip_bad_files>N</skip_bad_files>
+    <file_error_field/>
+    <file_error_message_field/>
+    <error_line_skipped>N</error_line_skipped>
+    <error_count_field/>
+    <error_fields_field/>
+    <error_text_field/>
+    <bad_line_files_destination_directory/>
+    <bad_line_files_extension>warning</bad_line_files_extension>
+    <error_line_files_destination_directory/>
+    <error_line_files_extension>error</error_line_files_extension>
+    <line_number_files_destination_directory/>
+    <line_number_files_extension>line</line_number_files_extension>
+    <date_format_lenient>Y</date_format_lenient>
+    <date_format_locale>es_ES</date_format_locale>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -590,7 +661,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
+      <xloc>160</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
@@ -612,7 +683,7 @@
     <error_description/>
     <fields>
       <field>
-        <name>Periodo</name>
+        <name>curso</name>
         <case_insensitive>N</case_insensitive>
       </field>
     </fields>
@@ -641,43 +712,21 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>TFG</connection>
+    <connection>TFG-Nuevo</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>public</schema>
       <table>dim_tiempo</table>
       <key>
-        <name>Periodo</name>
-        <field>Periodo</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>anio_inicio</name>
-        <field>anio_inicio</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>anio_fin</name>
-        <field>anio_fin</field>
+        <name>curso</name>
+        <field>curso</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
-        <name>Periodo</name>
-        <rename>Periodo</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>anio_inicio</name>
-        <rename>anio_inicio</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>anio_fin</name>
-        <rename>anio_fin</rename>
+        <name>curso</name>
+        <rename>curso</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -690,7 +739,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1320</xloc>
+      <xloc>912</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
@@ -715,7 +764,7 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>Periodo</name>
+        <name>curso</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -738,66 +787,6 @@
     </GUI>
   </step>
   <step>
-    <name>Partir campos</name>
-    <type>FieldSplitter</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <splitfield>curso_copia</splitfield>
-    <delimiter>-</delimiter>
-    <enclosure/>
-    <fields>
-      <field>
-        <name>anio_inicio</name>
-        <id/>
-        <idrem>N</idrem>
-        <type>Integer</type>
-        <format/>
-        <group/>
-        <decimal/>
-        <currency/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>
-      <field>
-        <name>anio_fin</name>
-        <id/>
-        <idrem>N</idrem>
-        <type>Integer</type>
-        <format/>
-        <group/>
-        <decimal/>
-        <currency/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1120</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Selecciona/Renombra valores</name>
     <type>SelectValues</type>
     <description/>
@@ -811,6 +800,7 @@
     <fields>
       <field>
         <name>Periodo</name>
+        <rename>curso</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -824,52 +814,6 @@
     </remotesteps>
     <GUI>
       <xloc>376</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Valor JavaScript modificado</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//Script here
-var curso_copia = Periodo;
-</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>curso_copia</name>
-        <rename>curso_copia</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>960</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>

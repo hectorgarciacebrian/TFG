@@ -436,11 +436,6 @@
   </notepads>
   <order>
     <hop>
-      <from>dim_edad</from>
-      <to>Filtrar filas</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Filtrar filas</from>
       <to>Selecciona/Renombra valores</to>
       <enabled>Y</enabled>
@@ -458,6 +453,11 @@
     <hop>
       <from>Filas Unicas</from>
       <to>Insertar / Actualizar</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>fact_edad</from>
+      <to>Filtrar filas</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -479,6 +479,10 @@
     <fields>
       <field>
         <name>grupo_edad</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+      <field>
+        <name>sexo</name>
         <case_insensitive>N</case_insensitive>
       </field>
     </fields>
@@ -512,18 +516,39 @@
     <compare>
       <condition>
         <negated>N</negated>
-        <leftvalue>Grupo de edad</leftvalue>
-        <function>&lt;></function>
-        <rightvalue/>
-        <value>
-          <name>constant</name>
-          <type>String</type>
-          <text>Total</text>
-          <length>-1</length>
-          <precision>-1</precision>
-          <isnull>N</isnull>
-          <mask/>
-        </value>
+        <conditions>
+          <condition>
+            <negated>N</negated>
+            <leftvalue>Grupo_de_edad</leftvalue>
+            <function>&lt;></function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>Total</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask/>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>AND</operator>
+            <leftvalue>Sexo</leftvalue>
+            <function>&lt;></function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>Ambos sexos</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask/>
+            </value>
+          </condition>
+        </conditions>
       </condition>
     </compare>
     <attributes/>
@@ -536,6 +561,60 @@
     </remotesteps>
     <GUI>
       <xloc>392</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insertar / Actualizar</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>TFG-Nuevo</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>public</schema>
+      <table>dim_quien_edad</table>
+      <key>
+        <name>grupo_edad</name>
+        <field>grupo_edad</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>sexo</name>
+        <field>sexo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>grupo_edad</name>
+        <rename>grupo_edad</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>sexo</name>
+        <rename>sexo</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1192</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
@@ -561,6 +640,14 @@
     <fields>
       <field>
         <name>grupo_edad</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>sexo</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -595,8 +682,12 @@
     </partitioning>
     <fields>
       <field>
-        <name>Grupo de edad</name>
+        <name>Grupo_de_edad</name>
         <rename>grupo_edad</rename>
+      </field>
+      <field>
+        <name>Sexo</name>
+        <rename>sexo</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -615,8 +706,8 @@
     </GUI>
   </step>
   <step>
-    <name>dim_edad</name>
-    <type>CsvInput</type>
+    <name>fact_edad</name>
+    <type>TextFileInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -625,20 +716,44 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${Internal.Entry.Current.Directory}/Datos 2015-2022_edad.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
+    <accept_filenames>N</accept_filenames>
+    <passing_through_fields>N</passing_through_fields>
+    <accept_field/>
+    <accept_stepname/>
     <separator>;</separator>
     <enclosure>"</enclosure>
+    <enclosure_breaks>N</enclosure_breaks>
+    <escapechar/>
     <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <format>mixed</format>
+    <nr_headerlines>1</nr_headerlines>
+    <footer>N</footer>
+    <nr_footerlines>1</nr_footerlines>
+    <line_wrapped>N</line_wrapped>
+    <nr_wraps>1</nr_wraps>
+    <layout_paged>N</layout_paged>
+    <nr_lines_per_page>80</nr_lines_per_page>
+    <nr_lines_doc_header>0</nr_lines_doc_header>
+    <noempty>Y</noempty>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <rownumByFile>N</rownumByFile>
+    <rownum_field/>
+    <format>DOS</format>
     <encoding>UTF-8</encoding>
+    <length>Characters</length>
+    <add_to_result_filenames>Y</add_to_result_filenames>
+    <file>
+      <name>${Internal.Entry.Current.Directory}/Edades</name>
+      <filemask>.*\.csv</filemask>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+      <type>CSV</type>
+      <compression>None</compression>
+    </file>
+    <filters>
+    </filters>
     <fields>
       <field>
         <name>﻿Universidad</name>
@@ -647,31 +762,43 @@
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
         <length>23</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
       <field>
-        <name>Nivel académico</name>
+        <name>Nivel_académico</name>
         <type>String</type>
         <format/>
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>5</length>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>13</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
       <field>
-        <name>Tipo de centro</name>
+        <name>Tipo_de_centro</name>
         <type>String</type>
         <format/>
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>5</length>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>15</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
       <field>
         <name>Sexo</name>
@@ -680,31 +807,43 @@
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
         <length>11</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
       <field>
-        <name>Grupo de edad</name>
+        <name>Grupo_de_edad</name>
         <type>String</type>
         <format/>
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
         <length>15</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
       <field>
-        <name>Rama de enseñanza</name>
+        <name>Rama_de_enseñanza</name>
         <type>String</type>
         <format/>
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
         <length>29</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
       <field>
         <name>Periodo</name>
@@ -713,22 +852,55 @@
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
         <length>9</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
       <field>
         <name>Total</name>
-        <type>BigNumber</type>
-        <format>#,###.#</format>
+        <type>String</type>
+        <format/>
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
         <length>15</length>
-        <precision>0</precision>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
     </fields>
+    <limit>0</limit>
+    <error_ignored>N</error_ignored>
+    <skip_bad_files>N</skip_bad_files>
+    <file_error_field/>
+    <file_error_message_field/>
+    <error_line_skipped>N</error_line_skipped>
+    <error_count_field/>
+    <error_fields_field/>
+    <error_text_field/>
+    <bad_line_files_destination_directory/>
+    <bad_line_files_extension>warning</bad_line_files_extension>
+    <error_line_files_destination_directory/>
+    <error_line_files_extension>error</error_line_files_extension>
+    <line_number_files_destination_directory/>
+    <line_number_files_extension>line</line_number_files_extension>
+    <date_format_lenient>Y</date_format_lenient>
+    <date_format_locale>es_ES</date_format_locale>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -738,50 +910,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>192</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insertar / Actualizar</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>TFG</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>public</schema>
-      <table>dim_edad</table>
-      <key>
-        <name>grupo_edad</name>
-        <field>grupo_edad</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>grupo_edad</name>
-        <rename>grupo_edad</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1192</xloc>
+      <xloc>208</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
